@@ -4,7 +4,6 @@ A data quality assessment of the UCI *Online Retail* dataset against four KPIs:
 **Completeness, Latency, Accuracy, Consistency.** Built as a class assignment on
 how to evaluate datasets before using them to train AI models.
 
-- **Author:** Maria Yermakova
 - **Analysis date:** 2026-04-26
 - **Notebook:** [`data_quality_assessment.ipynb`](data_quality_assessment.ipynb)
 
