@@ -7,8 +7,7 @@ how to evaluate datasets before using them to train AI models.
 - **Author:** Maria Yermakova
 - **Analysis date:** 2026-04-26
 - **Notebook:** [`data_quality_assessment.ipynb`](data_quality_assessment.ipynb)
-- **Raw KPI numbers:** [`kpi_results.json`](kpi_results.json)
-- **Figures:** [`figures/`](figures)
+
 
 ---
 
@@ -79,7 +78,8 @@ Two columns drive almost all the missingness. `CustomerID` is null on roughly
 one row in four — a serious gap for any user-level model, because customer
 identity is the join key. `Description` has trivial nulls.
 
-![Missing values per column](figures/01_missing_values.png)
+<img width="795" height="406" alt="Screenshot 2026-04-26 at 16 40 07" src="https://github.com/user-attachments/assets/6a7e6e88-f21d-4d69-903a-a60fd3bccd93" />
+
 
 ### (b) Latency — **freshness score 0/100**
 
@@ -117,8 +117,7 @@ and `UnitPrice` (£38,970) deserve manual inspection — they look like manual
 adjustments rather than real sales. The IQR outlier counts are reported for
 visibility; many of them are valid wholesale orders rather than errors.
 
-![Quantity distribution](figures/02_quantity_hist.png)
-![Unit price distribution](figures/03_unitprice_hist.png)
+
 
 ### (d) Consistency — **91.31%**
 
@@ -138,7 +137,7 @@ names) — a canonical-description lookup needs to be built before joining on
 
 ### KPI scorecard
 
-![KPI scorecard](figures/06_kpi_scorecard.png)
+
 
 | KPI                | Score   |
 |--------------------|--------:|
@@ -147,64 +146,14 @@ names) — a canonical-description lookup needs to be built before joining on
 | Consistency        | 91.31%  |
 | Freshness (latency)| 0/100   |
 
+<img width="763" height="407" alt="Screenshot 2026-04-26 at 16 38 21" src="https://github.com/user-attachments/assets/14a42011-e339-4b30-8ed0-be24825b4776" />
+
 ---
 
 ## 3. Conclusion
 
-The Online Retail dataset is **structurally clean but temporally obsolete**.
-Completeness, accuracy, and consistency all sit in the 90s, which is acceptable
-for educational and benchmarking purposes after a modest cleaning pass: drop
-full duplicates, build a canonical description per `StockCode`, separate
-cancellations and returns from real sales, and decide on a strategy (impute,
-drop, or model-as-anonymous) for the 25% of rows that are missing `CustomerID`.
+The Online Retail dataset is clean in structure but very outdated.
+Its quality is generally good: completeness, accuracy, and consistency are all around 90%, so it works well for learning or testing after a bit of cleaning. For example, you should remove duplicates, standardize product descriptions, separate returns from real sales, and decide what to do with missing CustomerID values (about 25% of the data).
+However, it’s not suitable for real-world (production) AI use because it’s too old. The latest data is from December 2011 — more than 14 years ago. Since then, prices, products, customer behavior, and overall market conditions have changed a lot.
 
-What disqualifies the dataset for any *production* AI use case is **latency**:
-the most recent transaction is from December 2011, so the data is over 14 years
-stale relative to today. Prices, product mix, customer behaviour, country
-distribution, and even the macroeconomic regime have all moved since then.
 
-**Recommended use:** teaching, methodological prototyping, reproducibility
-benchmarks for clustering, RFM, and basket-analysis pipelines.
-**Not recommended for:** any model that will be deployed against current
-customers, current inventory, or current prices.
-
----
-
-## Repository layout
-
-```
-.
-├── README.md                          # this data card
-├── data_quality_assessment.ipynb      # full analysis notebook
-├── kpi_results.json                   # machine-readable KPI numbers
-└── figures/
-    ├── 01_missing_values.png
-    ├── 02_quantity_hist.png
-    ├── 03_unitprice_hist.png
-    ├── 04_top_countries.png
-    ├── 05_monthly_revenue.png
-    └── 06_kpi_scorecard.png
-```
-
-## How to reproduce
-
-```bash
-pip install pandas matplotlib jupyter
-jupyter notebook data_quality_assessment.ipynb
-```
-
-Place `Online Retail.csv` in the same folder as the notebook, then *Run All*.
-
-## How to publish to GitHub
-
-```bash
-git init
-git add README.md data_quality_assessment.ipynb kpi_results.json figures/
-git commit -m "Online Retail — data quality assessment and data card"
-git branch -M main
-git remote add origin https://github.com/<your-username>/online-retail-data-card.git
-git push -u origin main
-```
-
-> Do **not** commit `Online Retail.csv` if your course requires keeping the raw
-> data out of the repo — link to the UCI source instead.
