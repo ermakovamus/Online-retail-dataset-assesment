@@ -147,6 +147,19 @@ names) — a canonical-description lookup needs to be built before joining on
 
 <img width="763" height="407" alt="Screenshot 2026-04-26 at 16 38 21" src="https://github.com/user-attachments/assets/14a42011-e339-4b30-8ed0-be24825b4776" />
 
+## 2.1 Statistics 
+
+## 2.1.1 Top 10 countries by transaction count 
+<img width="851" height="427" alt="Screenshot 2026-04-26 at 16 52 12" src="https://github.com/user-attachments/assets/1227cff3-36b5-48be-8f63-621119e51c40" />
+
+## 2.1.2 Distribution of unit price 
+
+<img width="790" height="427" alt="Screenshot 2026-04-26 at 16 53 42" src="https://github.com/user-attachments/assets/bc85bf44-547f-4c73-bc25-c1a54bc55a1a" />
+
+## 2.1.3 Monthly revenue 
+
+<img width="850" height="427" alt="Screenshot 2026-04-26 at 16 54 40" src="https://github.com/user-attachments/assets/78b308ea-c74b-415a-8fe0-46c0a2a562e3" />
+
 ---
 
 ## 3. Conclusion
